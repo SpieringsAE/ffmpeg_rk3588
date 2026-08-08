@@ -120,9 +120,21 @@ provides=(
 source=(
   git+https://git.ffmpeg.org/ffmpeg.git?signed#tag=n${pkgver}
   0001-Add-av_stream_get_first_dts-for-Chromium.patch
+  0001-postproc.patch
+  0001-libreelec.patch
+  0001-v4l2-request.patch
+  0001-wip-hevc-Add-support-for-sps-st-rps-control.patch
+  0001-v4l2-drmprime.patch
+  0001-vf-deinterlace-v4l2m2m.patch
 )
 b2sums=('e22f57e76d587eecfdfe3ba0fbfaa37c6c95b43d4fc60da9d4feb11a2c87dcaf7ac891fbaa649289bec4ef40378743d61c77128b7127e8dc42d95f95a60aee69'
-        'e5f7b79f7731be9ee5a7280a9221fb531ac5a2d9820fc5870b68b0eabea667dfbe8f39f41c1e1763a4c84982896afaa54c81ff57847d203b70afafd726689e5d')
+        'e5f7b79f7731be9ee5a7280a9221fb531ac5a2d9820fc5870b68b0eabea667dfbe8f39f41c1e1763a4c84982896afaa54c81ff57847d203b70afafd726689e5d'
+      'SKIP'
+      'SKIP'
+      'SKIP'
+      'SKIP'
+      'SKIP'
+      'SKIP')
 validpgpkeys=(DD1EC9E8DE085C629B3E1846B18E8928B3948D64) # Michael Niedermayer <michael@niedermayer.cc>
 
 prepare() {
@@ -130,6 +142,12 @@ prepare() {
 
   # https://crbug.com/1251779
   git apply -3 ../0001-Add-av_stream_get_first_dts-for-Chromium.patch
+  git apply -3 ../0001-postproc.patch
+  git apply -3 ../0001-libreelec.patch
+  git apply -3 ../0001-v4l2-request.patch
+#  git apply -3 ../0001-wip-hevc-Add-support-for-sps-st-rps-control.patch
+#  git apply -3 ../0001-v4l2-drmprime.patch
+  git apply -3 ../0001-vf-deinterlace-v4l2m2m.patch
 }
 
 build() {
@@ -204,6 +222,7 @@ build() {
     --enable-opencl \
     --enable-opengl \
     --enable-shared \
+    --enable-v4l2-request \
     --enable-vapoursynth \
     --enable-version3 \
     --enable-vulkan \
